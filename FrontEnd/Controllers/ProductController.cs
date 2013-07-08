@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Core.Domain.Catalog;
 using Core.Interfaces.Services;
 using FrontEnd.ViewModels.Product;
+using NHibernate.Transform;
 
 namespace FrontEnd.Controllers
 {
@@ -23,6 +25,20 @@ namespace FrontEnd.Controllers
         {
             var product = DB.Get<Product>(id);
             var vm = Map.Map<DisplayProductViewModel>(product);
+            DisplayProductViewModel alias = null;
+            //I can also project to a view model directly, and do stuff with futures here to batch queries.
+            var projectedProductVm = DB.QueryOver<Product>()
+                                .Where(x => x.Id == id)
+                                .SelectList(list => list.Select(x => x.Id).WithAlias(() => alias.Id)
+                                    .Select(x => x.Name).WithAlias(() => alias.Name))
+                                .TransformUsing(Transformers.AliasToBean<DisplayProductViewModel>())
+                                .Take(10)
+                                .Future<DisplayProductViewModel>();
+            var stores = DB.QueryOver<Store>()
+                .Take(10)
+                .Future()
+                .ToList();
+
             return View(vm);
         }
 

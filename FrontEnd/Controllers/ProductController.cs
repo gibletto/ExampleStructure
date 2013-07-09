@@ -13,7 +13,7 @@ namespace FrontEnd.Controllers
         /// <summary>
         /// No default constructor clearly signifies the dependencies to the outside world.
         /// I can remove the container entirely also and just implement a controller factory to handle this.
-        /// It all goes in the infrastruce, I'm free to code
+        /// It all goes in the infrastructure, I'm free to code
         /// </summary>
         /// <param name="service"></param>
         public ProductController(ISomeService service)
@@ -25,8 +25,9 @@ namespace FrontEnd.Controllers
         {
             var product = DB.Get<Product>(id);
             var vm = Map.Map<DisplayProductViewModel>(product);
-            DisplayProductViewModel alias = null;
+            //Return here or
             //I can also project to a view model directly, and do stuff with futures here to batch queries.
+            DisplayProductViewModel alias = null;
             var projectedProductVm = DB.QueryOver<Product>()
                                 .Where(x => x.Id == id)
                                 .SelectList(list => list.Select(x => x.Id).WithAlias(() => alias.Id)

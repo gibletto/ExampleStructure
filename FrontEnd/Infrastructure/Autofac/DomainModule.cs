@@ -10,7 +10,7 @@ namespace FrontEnd.Infrastructure.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ClientSpecificStrategy>().As<ISomeStategy>();
+            builder.RegisterType<ClientSpecificStrategy>().As<ISomeStrategy>();
             builder.RegisterType<SomeService>().As<ISomeService>();
         }
     }

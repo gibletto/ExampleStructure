@@ -3,7 +3,7 @@ using Core.Interfaces.Strategy;
 
 namespace Core.Strategy
 {
-    class GenericClientStrategy : ISomeStategy
+    class GenericClientStrategy : ISomeStrategy
     {
         public void DoCustomerSpecificAlg()
         {

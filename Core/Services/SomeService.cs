@@ -9,9 +9,9 @@ namespace Core.Services
     public class SomeService : ISomeService
     {
         private readonly ISession _session;
-        private readonly ISomeStategy _someStategy;
+        private readonly ISomeStrategy _someStategy;
 
-        public SomeService(ISession session, ISomeStategy someStategy)
+        public SomeService(ISession session, ISomeStrategy someStategy)
         {
             _session = session;
             _someStategy = someStategy;

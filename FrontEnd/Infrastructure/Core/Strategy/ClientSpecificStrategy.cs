@@ -3,7 +3,7 @@ using Core.Interfaces.Strategy;
 
 namespace FrontEnd.Infrastructure.Core.Strategy
 {
-    public class ClientSpecificStrategy : ISomeStategy
+    public class ClientSpecificStrategy : ISomeStrategy
     {
         public void DoCustomerSpecificAlg()
         {

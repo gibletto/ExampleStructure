@@ -30,7 +30,7 @@ namespace FrontEnd.Infrastructure.Autofac
                 }
                 var session = sessionFactory.GetCurrentSession();
                 return session;
-            }).As<ISession>().InstancePerHttpRequest();
+            }).As<ISession>().ExternallyOwned().InstancePerHttpRequest();
         }
     }
 }
